@@ -10,12 +10,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter emotion, 0 to exit");
         EmoteList el = new EmoteList();
-        while(true){ //for now
+        Emote e = new Emote("happy","!!!!");
+        el.addEmoji(e);
+        /*while(true){ //for now
             String emotion = sc.nextLine();
             if (emotion.equals("0")){
                 break;
             }
             System.out.println(el.getEmojiWithEmotion(emotion));
-        }
+        }*/
     }
 }

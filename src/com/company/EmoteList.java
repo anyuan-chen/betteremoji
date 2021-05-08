@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 public class EmoteList {
     private static Emote notFound;
     private ArrayList<Emote> emoteList;
+
     public EmoteList() throws IOException, ParseException {
         //initialize arrayList and all objects
         emoteList = new ArrayList<>();
@@ -32,6 +33,7 @@ public class EmoteList {
             emoteList.add(new Emote(text, emotion));
         }
     }
+
     public String getEmojiWithEmotion(String emotion){
         Collections.shuffle(emoteList);
         for (Emote emote : emoteList) {
@@ -39,7 +41,27 @@ public class EmoteList {
                 return emote.getEmojiText();
             }
         }
-        //shuffle order aftter done
+        //shuffle order after done
         return notFound.getEmojiText();
+    }
+
+    public void addEmoji(Emote emoji) throws IOException, ParseException {
+        emoteList.add(emoji);
+        JSONParser parser = new JSONParser();
+        JSONArray emojiJSON = (JSONArray) parser.parse(new FileReader("/Users/andrewchen/IdeaProjects/betteremote/emotes.json"));
+
+        JSONObject emo = new JSONObject();
+        emo.put("emotion:",emoji.getEmojiText());
+        emo.put("text:",emoji.getEmotion());
+        emojiJSON.add(emo);
+        //add to arraylist
+        //arraylist -> json,
+        try {
+            FileWriter file = new FileWriter("/Users/andrewchen/IdeaProjects/betteremote/emotes.json");
+            file.write(emojiJSON.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
