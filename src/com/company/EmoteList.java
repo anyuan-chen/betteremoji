@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.*;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -44,6 +45,12 @@ public class EmoteList {
         //shuffle order after done
         return notFound.getEmojiText();
     }
+
+    public String getEmojiRandom(){
+        Random rand = new Random();
+        return emoteList.get(rand.nextInt(emoteList.size()-1)).getEmojiText();
+    }
+
 
     public void addEmoji(Emote emoji) throws IOException, ParseException {
         emoteList.add(emoji);
